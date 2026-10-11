@@ -20,6 +20,7 @@ export const Footer: React.FC = () => {
     { label: 'Solar Products', path: '/products' },
     { label: 'Illustrative Projects', path: '/projects' },
     { label: 'Installation Budget Calculator', path: '/budget-calculator' },
+    { label: 'Solar PV Calculator', path: '/solar-pv-calculator' },
     { label: 'Solar Sizing Estimator', path: '/solar-estimator' },
     { label: 'Contact Us', path: '/contact' },
   ];

@@ -20,6 +20,7 @@ import { ProductsPage } from './pages/ProductsPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { BudgetCalculatorPage } from './pages/BudgetCalculatorPage';
 import { SolarEstimatorPage } from './pages/SolarEstimatorPage';
+import { SolarPvCalculatorPage } from './pages/SolarPvCalculatorPage';
 import { ContactPage } from './pages/ContactPage';
 
 const AppContent: React.FC = () => {
@@ -49,6 +50,8 @@ const AppContent: React.FC = () => {
         return <BudgetCalculatorPage />;
       case '/solar-estimator':
         return <SolarEstimatorPage />;
+      case '/solar-pv-calculator':
+        return <SolarPvCalculatorPage />;
       case '/contact':
         return <ContactPage />;
       default:

@@ -104,87 +104,63 @@ export const HomePage: React.FC = () => {
   return (
     <div className="bg-white">
       {/* SECTION A: HERO SECTION */}
-      <section className="relative bg-[#10243A] text-white overflow-hidden">
-        {/* Subtle background glow */}
-        <div className="absolute inset-0 bg-radial from-emerald-900/20 via-transparent to-transparent pointer-events-none" />
+      <section className="relative min-h-[680px] overflow-hidden text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${IMAGES.hero})` }}
+        />
+        <div className="absolute inset-0 bg-slate-950/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/65 via-slate-950/35 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-20 sm:pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left Column Content */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-3 py-1 rounded-full">
-                <Sun className="w-3.5 h-3.5 text-amber-400" />
-                <span>Solar Solutions for Homes & Businesses in Karachi</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                Power Your Home. <br />
-                <span className="text-amber-400">Reduce Your Energy Costs.</span>
-              </h1>
-
-              <p className="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed">
-                Explore solar installation, maintenance, panel cleaning, and quality solar equipment for residential and commercial needs in Karachi.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <button
-                  onClick={() => navigate('/budget-calculator')}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#10243A] font-bold text-xs sm:text-sm transition-all shadow-md cursor-pointer"
-                >
-                  <Calculator className="w-4 h-4" />
-                  <span>Calculate Installation Budget</span>
-                </button>
-
-                <a
-                  href={createWhatsAppLink('Assalam-o-Alaikum, I visited your website and would like to chat about solar system options for my Karachi home.')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-sm"
-                >
-                  <MessageSquare className="w-4 h-4 fill-white/20" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
-
-              {/* Quick Trust Highlights (No invented claims) */}
-              <div className="pt-4 border-t border-slate-800 flex flex-wrap gap-y-2 gap-x-6 text-xs text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>North Nazimabad, Karachi Based</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Custom Elevated Structures</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>On-Grid & Hybrid Configurations</span>
-                </span>
-              </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-28 lg:py-32">
+          <div className="max-w-3xl space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-slate-950/45 px-3 py-1 text-xs font-semibold text-emerald-200">
+              <Sun className="w-3.5 h-3.5 text-amber-400" />
+              <span>Solar Solutions for Homes & Businesses in Karachi</span>
             </div>
 
-            {/* Right Column Photographic Anchor */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/80 bg-slate-900 group">
-                <img
-                  src={IMAGES.hero}
-                  alt="Modern residential and commercial rooftop solar installation in Pakistan"
-                  className="w-full h-80 sm:h-96 object-cover group-hover:scale-102 transition-transform duration-500"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#10243A] via-transparent to-transparent pointer-events-none" />
+            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              Power Your Home. <br />
+              <span className="text-amber-400">Reduce Your Energy Costs.</span>
+            </h1>
 
-                <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3.5 rounded-xl border border-slate-800 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-white">Residential & Commercial Rooftops</span>
-                    <span className="text-[11px] text-amber-400 font-medium">Karachi Engineering</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
-                    Designed for heavy summer heat and coastal environmental durability.
-                  </p>
-                </div>
-              </div>
+            <p className="text-slate-100 text-sm sm:text-base max-w-xl leading-relaxed">
+              Explore solar installation, maintenance, panel cleaning, and quality solar equipment for residential and commercial needs in Karachi.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                onClick={() => navigate('/budget-calculator')}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#10243A] font-bold text-xs sm:text-sm transition-all shadow-md cursor-pointer"
+              >
+                <Calculator className="w-4 h-4" />
+                <span>Calculate Installation Budget</span>
+              </button>
+
+              <a
+                href={createWhatsAppLink('Assalam-o-Alaikum, I visited your website and would like to chat about solar system options for my Karachi home.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-sm"
+              >
+                <MessageSquare className="w-4 h-4 fill-white/20" />
+                <span>Chat on WhatsApp</span>
+              </a>
+            </div>
+
+            <div className="pt-4 border-t border-white/30 flex flex-wrap gap-y-2 gap-x-6 text-xs text-slate-100">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>North Nazimabad, Karachi Based</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Custom Elevated Structures</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>On-Grid & Hybrid Configurations</span>
+              </span>
             </div>
           </div>
         </div>

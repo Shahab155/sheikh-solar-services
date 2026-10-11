@@ -14,6 +14,7 @@ export const Header: React.FC = () => {
     { label: 'Solar Products', path: '/products' },
     { label: 'Projects', path: '/projects' },
     { label: 'Budget Calculator', path: '/budget-calculator' },
+    { label: 'Solar PV Calculator', path: '/solar-pv-calculator' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -62,17 +63,17 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Main Top Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-6">
         {/* Zone 1: Single Brand element */}
-        <Link to="/" className="flex items-center gap-3 shrink-0 group">
-          <div className="w-10 h-10 rounded-lg bg-[#10243A] flex items-center justify-center text-amber-400 shadow-sm border border-slate-800 group-hover:scale-105 transition-transform">
-            <Sun className="w-6 h-6 stroke-[2.2]" />
+        <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 shrink group">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-[#10243A] flex items-center justify-center text-amber-400 shadow-sm border border-slate-800 group-hover:scale-105 transition-transform">
+            <Sun className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-extrabold tracking-tight text-[#10243A] leading-tight whitespace-nowrap">
+          <div className="flex min-w-0 flex-col">
+            <span className="text-sm sm:text-lg font-extrabold tracking-tight text-[#10243A] leading-tight whitespace-nowrap">
               SHEIKH SOLAR
             </span>
-            <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-700 tracking-wider uppercase">
+            <span className="text-[8px] sm:text-[11px] font-semibold text-emerald-700 tracking-wide sm:tracking-wider uppercase whitespace-nowrap">
               & Electrical Engineering
             </span>
           </div>
@@ -101,20 +102,21 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Zone 3: Primary Action & Mobile Menu Toggle */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <a
             href={whatsappQuoteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors shadow-xs whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-lg text-[10px] sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors shadow-xs whitespace-nowrap"
           >
             <MessageSquare className="w-4 h-4 fill-white/20" />
-            <span>Get a Free Quote</span>
+            <span className="max-[360px]:hidden sm:inline">Get a Free Quote</span>
+            <span className="hidden max-[360px]:inline sm:hidden">Quote</span>
           </a>
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="xl:hidden p-1.5 sm:p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
