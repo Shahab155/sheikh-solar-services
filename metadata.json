@@ -1,0 +1,6 @@
+{
+  "name": "SHEIKH SOLAR & ELECTRICAL ENGINEERING",
+  "description": "Premium Karachi-based solar energy solutions, rooftop installations, maintenance, cleaning, equipment supply, and interactive budget calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
