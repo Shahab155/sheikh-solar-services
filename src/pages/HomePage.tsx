@@ -109,17 +109,17 @@ export const HomePage: React.FC = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${IMAGES.hero})` }}
         />
-        <div className="absolute inset-0 bg-slate-950/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/65 via-slate-950/35 to-transparent" />
+        <div className="absolute inset-0 bg-slate-950/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/45 via-slate-950/20 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-28 lg:py-32">
           <div className="max-w-3xl space-y-4 sm:space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-slate-950/45 px-3 py-1 text-xs font-semibold text-emerald-200">
-              <Sun className="w-3.5 h-3.5 text-amber-400" />
-              <span>Solar Solutions for Homes & Businesses in Karachi</span>
+              {/* <Sun className="w-3.5 h-3.5 text-amber-400" /> */}
+              {/* <span>Solar Solutions for Homes & Businesses in Karachi</span> */}
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Power Your Home. <br />
               <span className="text-amber-400">Reduce Your Energy Costs.</span>
             </h1>

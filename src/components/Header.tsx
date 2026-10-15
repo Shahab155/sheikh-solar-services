@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, Link } from '../utils/router';
 import { BUSINESS_INFO, createWhatsAppLink } from '../constants/business';
-import { Sun, Menu, X, Phone, MessageSquare } from 'lucide-react';
+import { Sun, Menu, X, Phone, MessageSquare, ChevronDown } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { currentPath, navigate } = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [calculatorsOpen, setCalculatorsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isHomePage = currentPath === '/';
+
+  useEffect(() => {
+    const updateScrollState = () => setIsScrolled(window.scrollY > 10);
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateScrollState);
+  }, []);
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -13,55 +25,35 @@ export const Header: React.FC = () => {
     { label: 'Services', path: '/services' },
     { label: 'Solar Products', path: '/products' },
     { label: 'Projects', path: '/projects' },
+  ];
+  const calculatorLinks = [
     { label: 'Budget Calculator', path: '/budget-calculator' },
     { label: 'Solar PV Calculator', path: '/solar-pv-calculator' },
-    { label: 'Contact', path: '/contact' },
   ];
 
   const handleNavClick = (path: string) => {
     navigate(path);
     setMobileMenuOpen(false);
+    setCalculatorsOpen(false);
   };
+
+  const isCalculatorActive = calculatorLinks.some((item) => currentPath === item.path);
 
   const whatsappQuoteUrl = createWhatsAppLink(
     'Assalam-o-Alaikum, I visited your website and would like a free quotation for solar installation.'
   );
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      {/* Top Utility Bar with phone and quick info */}
-      <div className="hidden lg:block bg-[#10243A] text-slate-300 text-xs py-1.5 px-6 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <span className="text-amber-400 font-medium">Karachi Location:</span> {BUSINESS_INFO.locationCity}
-            </span>
-            <span className="text-slate-500">|</span>
-            <a
-              href={`tel:${BUSINESS_INFO.phone.replace(/\s+/g, '')}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-emerald-400" />
-              <span>{BUSINESS_INFO.phoneDisplay}</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-xs">
-            <Link to="/solar-estimator" className="text-amber-300 hover:text-amber-200 transition-colors">
-              Quick System Sizing Estimator
-            </Link>
-            <span className="text-slate-600">·</span>
-            <a
-              href={BUSINESS_INFO.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors underline decoration-slate-600 underline-offset-2"
-            >
-              Find on Google Maps
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <header
+      className={`sticky top-[5vh] z-40 mt-[4vh] mx-auto w-[95%] overflow-visible rounded-[10%] border border-slate-200 transition-[background-color,backdrop-filter,box-shadow] duration-300 ${
+        isScrolled
+          ? 'bg-white/80 backdrop-blur-xl shadow-md'
+          : 'bg-white/95 backdrop-blur-none shadow-xs'
+      } ${
+        isHomePage ? '-mb-[calc(5vh+4rem)] sm:-mb-[calc(5vh+5rem)]' : ''
+      }`}
+    >
+      
       {/* Main Top Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-6">
         {/* Zone 1: Single Brand element */}
@@ -73,14 +65,14 @@ export const Header: React.FC = () => {
             <span className="text-sm sm:text-lg font-extrabold tracking-tight text-[#10243A] leading-tight whitespace-nowrap">
               SHEIKH SOLAR
             </span>
-            <span className="text-[8px] sm:text-[11px] font-semibold text-emerald-700 tracking-wide sm:tracking-wider uppercase whitespace-nowrap">
+            <span className="text-[8px] sm:text-[9px] font-semibold text-emerald-700 tracking-wide sm:tracking-wider uppercase whitespace-nowrap">
               & Electrical Engineering
             </span>
           </div>
         </Link>
 
         {/* Zone 2: Navigation Links */}
-        <nav className="hidden xl:flex items-center gap-6 text-sm font-medium text-slate-700">
+        <nav className="hidden xl:flex items-center gap-6 text-sm font-bold text-slate-700">
           {navLinks.map((item) => {
             const isActive =
               currentPath === item.path ||
@@ -99,6 +91,49 @@ export const Header: React.FC = () => {
               </button>
             );
           })}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setCalculatorsOpen(!calculatorsOpen)}
+              aria-expanded={calculatorsOpen}
+              aria-haspopup="true"
+              className={`inline-flex items-center gap-1 whitespace-nowrap py-1 transition-colors cursor-pointer ${
+                isCalculatorActive || calculatorsOpen
+                  ? 'text-emerald-700 font-semibold'
+                  : 'text-slate-600 hover:text-[#10243A]'
+              }`}
+            >
+              Calculators
+              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${calculatorsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {calculatorsOpen && (
+              <div className="absolute left-0 top-full z-50 mt-2 min-w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+                {calculatorLinks.map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => handleNavClick(item.path)}
+                    className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm transition-colors cursor-pointer ${
+                      currentPath === item.path
+                        ? 'bg-emerald-50 font-semibold text-emerald-800'
+                        : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <button
+            onClick={() => handleNavClick('/contact')}
+            className={`whitespace-nowrap py-1 transition-colors cursor-pointer ${
+              currentPath === '/contact'
+                ? 'text-emerald-700 font-semibold border-b-2 border-emerald-600'
+                : 'text-slate-600 hover:text-[#10243A]'
+            }`}
+          >
+            Contact
+          </button>
         </nav>
 
         {/* Zone 3: Primary Action & Mobile Menu Toggle */}
@@ -146,6 +181,46 @@ export const Header: React.FC = () => {
                 </button>
               );
             })}
+            <button
+              type="button"
+              onClick={() => setCalculatorsOpen(!calculatorsOpen)}
+              aria-expanded={calculatorsOpen}
+              className={`flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm font-medium transition-colors cursor-pointer ${
+                isCalculatorActive || calculatorsOpen
+                  ? 'bg-emerald-50 text-emerald-800 font-semibold'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              Calculators
+              <ChevronDown className={`h-4 w-4 transition-transform ${calculatorsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {calculatorsOpen && (
+              <div className="ml-3 flex flex-col gap-1 border-l-2 border-emerald-100 pl-2">
+                {calculatorLinks.map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => handleNavClick(item.path)}
+                    className={`rounded-md px-3 py-2.5 text-left text-sm transition-colors cursor-pointer ${
+                      currentPath === item.path
+                        ? 'bg-emerald-50 font-semibold text-emerald-800'
+                        : 'text-slate-600 hover:bg-slate-50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+            <button
+              onClick={() => handleNavClick('/contact')}
+              className={`text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+                currentPath === '/contact'
+                  ? 'bg-emerald-50 text-emerald-800 font-semibold'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              Contact
+            </button>
             <button
               onClick={() => handleNavClick('/solar-estimator')}
               className="text-left px-3 py-2.5 rounded-md text-sm font-medium text-amber-800 bg-amber-50/70 hover:bg-amber-100/70 transition-colors cursor-pointer"
